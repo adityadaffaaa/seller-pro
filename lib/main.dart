@@ -90,7 +90,7 @@ void main() async {
   AppType appType;
 
   // await DotEnv.load(fileName: "lib/env/.env");
-  appName = "Ekomad";
+  appName = "Seller Pro";
   appType = AppType.ekomad;
 
   Widget configuredApp = AAppConfig(
