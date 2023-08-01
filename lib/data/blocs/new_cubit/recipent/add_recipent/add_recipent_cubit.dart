@@ -1,0 +1,44 @@
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
+import 'package:marketplace/api/api.dart';
+import 'package:marketplace/data/models/models.dart';
+import 'package:marketplace/data/repositories/repositories.dart';
+
+part 'add_recipent_state.dart';
+
+class AddRecipentCubit extends Cubit<AddRecipentState> {
+  AddRecipentCubit() : super(AddRecipentInitial());
+
+  final RecipentRepository _recipentRepository = RecipentRepository();
+
+  Future<void> addRecipent({
+    @required String name,
+    @required String phone,
+    @required String address,
+    @required String email,
+    @required int subdistrictId,
+    @required String postalCode,
+    @required String note,
+    @required String latitude,
+    @required String longitude,
+  }) async {
+    emit(AddRecipentLoading());
+    try {
+      final response = await _recipentRepository.addRecipent(
+        name: name,
+        phone: phone,
+        address: address,
+        email: email,
+        subdistrictId: subdistrictId,
+        postalCode: postalCode,
+        note: note,
+        latitude: latitude,
+        longitude: longitude,
+      );
+      emit(AddRecipentSuccess(response.data));
+    } catch (error) {
+      emit(AddRecipentFailure(error.toString()));
+    }
+  }
+}

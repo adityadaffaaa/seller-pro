@@ -1,0 +1,6 @@
+package id.sellerpro.app
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
