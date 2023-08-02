@@ -11,7 +11,8 @@ class FooterProductDetail extends StatelessWidget {
     Key key,
     @required this.onPressed,
     @required this.phone,
-    @required this.stock,
+    this.stock,
+    // @required this.stock,
   }) : super(key: key);
 
   final Function() onPressed;
@@ -63,7 +64,9 @@ class FooterProductDetail extends StatelessWidget {
               onPressed: onPressed,
               height: 45,
               color:
-                  stock > 0 ? Theme.of(context).primaryColor : Colors.grey[350],
+                  // stock > 0 ?
+                  Theme.of(context).primaryColor,
+              // : Colors.grey[350],
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

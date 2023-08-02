@@ -45,14 +45,17 @@ class BottomNavCubit extends Cubit<BottomNavState> {
         state: BottomNavHomeLoaded(),
       ),
       BottomNavItem(
-        icon: SvgPicture.asset(AppImg.ic_shopmenu),
+        icon: SvgPicture.asset(AppImg.ic_product_menu),
         activeIcon: kIsWeb
             ? SvgPicture.asset(
-                AppImg.ic_shopactive_web,
-                color: AppColor.appPrimary,
+                AppImg.ic_product_menu_active,
+                color: AppColor.primary,
               )
-            : SvgPicture.asset(AppImg.ic_shopactive),
-        label: "Toko Saya",
+            : SvgPicture.asset(
+                AppImg.ic_product_menu_active,
+                color: AppColor.primary,
+              ),
+        label: "Produk",
         state: BottomNavProductLoaded(),
       ),
       BottomNavItem(

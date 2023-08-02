@@ -18,7 +18,7 @@ class GreenBG extends StatelessWidget {
         decoration: BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.fitWidth,
-              image: AssetImage("assets/images/decorations/bggreen.png"),
+              image: AssetImage("images/decorations/bggreen.png"),
             ),
             gradient: LinearGradient(
               begin: Alignment.centerLeft,

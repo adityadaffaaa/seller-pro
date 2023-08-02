@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marketplace/data/models/user.dart';
+import 'package:marketplace/ui/screens/mobile/nav/account/account_daftar_referral_screen.dart';
 import 'package:marketplace/ui/screens/mobile/nav/account/account_upgrade_member_screen.dart';
 import 'package:marketplace/ui/screens/mobile/saldo/home/saldo_home_screen.dart';
 import 'package:marketplace/ui/widgets/alert_dialog.dart';
@@ -170,7 +171,8 @@ class AccountInfoItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: InkWell(
-                  onTap: () => null,
+                  onTap: () =>
+                      AppExt.pushScreen(context, AccountDaftarReferralScreen()),
                   child: Row(
                     children: [
                       Expanded(

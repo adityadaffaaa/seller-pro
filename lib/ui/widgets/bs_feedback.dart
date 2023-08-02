@@ -10,6 +10,7 @@ import 'package:marketplace/ui/widgets/rounded_button.dart';
 import 'package:marketplace/utils/extensions.dart' as AppExt;
 import 'package:marketplace/utils/typography.dart' as AppTypo;
 import 'package:marketplace/utils/colors.dart' as AppColor;
+import 'package:marketplace/utils/images.dart' as AppImg;
 
 import '../screens/mobile/view_all/products/view_all_product_screen.dart';
 
@@ -458,6 +459,168 @@ class BSFeedback {
           );
         });
     return;
+  }
+
+  static Future inviteFriend(
+    BuildContext context, {
+    bool isDismissible = true,
+    bool enableDrag = true,
+  }) async {
+    double screenWidth = MediaQuery.of(context).size.width;
+    await showModalBottomSheet(
+      context: context,
+      isDismissible: isDismissible,
+      enableDrag: enableDrag,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(15))),
+      builder: (BuildContext bc) {
+        return Padding(
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Bagikan Link Referral",
+                      style: AppTypo.subtitle1
+                          .copyWith(fontWeight: FontWeight.bold)),
+                  IconButton(
+                    onPressed: () {
+                      AppExt.popScreen(context);
+                    },
+                    icon: Icon(
+                      Icons.close,
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(height: 10),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 10,
+                ),
+                decoration: BoxDecoration(
+                  color: AppColor.bgBadgeGreen,
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: AppColor.bgTextGreen),
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.info,
+                      color: AppColor.bgTextGreen,
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Expanded(
+                      child: Text(
+                        "Ajak member baru dan dapatkan bonus",
+                        style: AppTypo.body1Lato.copyWith(
+                          color: AppColor.textSecondary3,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+              Container(
+                margin: const EdgeInsets.fromLTRB(10, 8, 10, 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () => null,
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            AppImg.ic_facebook,
+                            height: 40,
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          Text(
+                            "Facebook",
+                            style: AppTypo.interVerySmall.copyWith(
+                              color: AppColor.black,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () => null,
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            AppImg.ic_whatsapp,
+                            height: 40,
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          Text(
+                            "Whatsapp",
+                            style: AppTypo.interVerySmall.copyWith(
+                              color: AppColor.black,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () => null,
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            AppImg.ic_telegram,
+                            height: 40,
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          Text(
+                            "Telegram",
+                            style: AppTypo.interVerySmall.copyWith(
+                              color: AppColor.black,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () => null,
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            AppImg.ic_copylink,
+                            height: 40,
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          Text(
+                            "Salin Link",
+                            style: AppTypo.interVerySmall.copyWith(
+                              color: AppColor.black,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
 

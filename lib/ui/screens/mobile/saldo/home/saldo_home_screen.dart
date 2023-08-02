@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:marketplace/ui/screens/mobile/saldo/detail_transaksi/detail_transaksi_komisi_screen.dart';
 import 'package:marketplace/ui/screens/mobile/saldo/home/widgets/greenBG.dart';
 import 'package:marketplace/ui/screens/mobile/saldo/home/widgets/my_commission_section.dart';
 import 'package:marketplace/utils/extensions.dart' as AppExt;
@@ -66,6 +67,7 @@ class _SaldoHomeScreenState extends State<SaldoHomeScreen> {
                 color: Colors.black,
               ),
               onPressed: () {
+                AppExt.popScreen(context);
                 // if (kIsWeb) {
                 //   AppExt.pushScreen(context, MainScreen());
                 //   BlocProvider.of<BottomNavCubit>(context).navItemTapped(0);
@@ -134,7 +136,8 @@ class _SaldoHomeScreenState extends State<SaldoHomeScreen> {
                       },
                       itemBuilder: (context, index) {
                         return InkWell(
-                          onTap: () {},
+                          onTap: () => AppExt.pushScreen(
+                              context, DetailTransaksiKomisiScreen()),
                           child: Container(
                             margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
                             child: Row(

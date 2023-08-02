@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:marketplace/ui/screens/mobile/saldo/detail_transaksi/detail_transaksi_komisi_screen.dart';
 import 'package:marketplace/ui/widgets/edit_text.dart';
 import 'package:marketplace/utils/extensions.dart' as AppExt;
 import 'package:marketplace/utils/typography.dart' as AppTypo;
@@ -68,8 +69,8 @@ class _HistorySaldoScreenState extends State<HistorySaldoScreen> {
                       Expanded(
                         flex: 8,
                         child: EditText(
-                          fillColor: AppColor.lightGrey,
-                          hintText: "Cari Produk",
+                          fillColor: AppColor.lightGrey3,
+                          hintText: "Cari Riwayat",
                           inputType: InputType.search,
                         ),
                       ),
@@ -110,6 +111,7 @@ class _HistorySaldoScreenState extends State<HistorySaldoScreen> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
+                      AppExt.pushScreen(context, DetailTransaksiKomisiScreen());
                       // if (state.wallets[index].type ==
                       //     "commission")
                       //   AppExt.pushScreen(

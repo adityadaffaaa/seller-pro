@@ -56,7 +56,7 @@ class AccountDaftarReferralScreen extends StatelessWidget {
         centerTitle: true,
         titleSpacing: 10,
         leading: IconButton(
-          onPressed: () => null,
+          onPressed: () => AppExt.popScreen(context),
           icon: Icon(
             AntDesign.arrowleft,
             color: AppColor.black,

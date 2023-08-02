@@ -6,6 +6,7 @@ import 'package:marketplace/ui/screens/mobile/view_all/agendas/detail_agenda_scr
 import 'package:marketplace/ui/screens/mobile/view_all/agendas/view_all_agenda_screen.dart';
 import 'package:marketplace/utils/typography.dart' as AppTypo;
 import 'package:marketplace/utils/colors.dart' as AppColor;
+import 'package:marketplace/utils/extensions.dart' as AppExt;
 
 class AgendaList extends StatelessWidget {
   const AgendaList({
@@ -41,7 +42,8 @@ class AgendaList extends StatelessWidget {
               Material(
                 color: AppColor.transparent,
                 child: InkWell(
-                  onTap: () => ViewAllAgendaScreen(),
+                  onTap: () =>
+                      AppExt.pushScreen(context, ViewAllAgendaScreen()),
                   borderRadius: BorderRadius.circular(6),
                   child: Text(
                     "Lihat Semua",
@@ -77,7 +79,7 @@ class AgendaList extends StatelessWidget {
                 width: 150,
                 child: AgendaListItem(
                   agenda: agenda,
-                  onTap: () => DetailAgendaScreen(),
+                  onTap: () => AppExt.pushScreen(context, DetailAgendaScreen()),
                 ),
               );
             },

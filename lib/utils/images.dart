@@ -4,7 +4,9 @@ const d_wave_tr = "images/decorations/d_wave_tr.svg";
 const d_wave_tr_p = "images/decorations/d_wave_tr.png";
 const komunitas_banner = "images/decorations/komunitas_banner.png";
 const upgrade_finpay_banner = "images/decorations/upgrade_finpay_banner.png";
-
+const invite_banner = "images/decorations/invite_banner.png";
+const push_product_banner = "images/decorations/push_product_banner.png";
+const img_bg_invite_friends = "images/decorations/img_bg_invite_friends.png";
 /* ICONS */
 // PNG
 const ic_ekomad = "images/icons/ic_ekomad.png";
@@ -15,7 +17,7 @@ const ic_agen = 'images/icons/ic_agen.png';
 const ic_dropshipper = 'images/icons/ic_dropshipper.png';
 const ic_stokis = 'images/icons/ic_stokis.png';
 const ic_distributor = 'images/icons/ic_distributor.png';
-const ic_tim_kerja = 'images/icons/ic_tim_kerja.png';
+const ic_timkerja = 'images/icons/ic_tim_kerja.png';
 const ic_bni = 'images/icons/ic_bni.png';
 const ic_bri = 'images/icons/ic_bri.png';
 const ic_cod = 'images/icons/ic_cod.png';
@@ -72,6 +74,7 @@ const ic_transfer = 'images/icons/ic_transfer.svg';
 const ic_dompet_2 = 'images/icons/ic_dompet_2.svg';
 const ic_status_success = 'images/icons/ic_status_success.svg';
 const ic_seller_pro_svg = 'images/icons/ic_seller_pro_svg.svg';
+const ic_sellerpro = 'images/icons/ic_seller_pro_svg.svg';
 const ic_allcategory = "images/icons/allcategories.svg";
 const ic_shop = "images/icons/ic_shop.svg";
 const ic_sendorder = "images/icons/ic_sendorder.svg";
@@ -79,6 +82,7 @@ const ic_menu = "images/icons/ic_menu.svg";
 const ic_food_fill = "images/icons/ic_food_fill.svg";
 const ic_food_fill_white = "images/icons/ic_food_fill_white.svg";
 const ic_reseller = "images/icons/ic_reseller.svg";
+const ic_reseller_png = "images/icons/ic_reseller.png";
 const ic_supplier = "images/icons/ic_supplier.svg";
 const ic_agent = "images/icons/ic_agent.svg";
 const ic_community = "images/icons/ic_community.svg";
@@ -163,7 +167,7 @@ const img_product_4 = "images/img_product_4.png";
 const img_product_5 = "images/img_product_5.png";
 const img_product_header = "images/img_product_header.png";
 const img_banner = "images/img_banner.png";
-const img_bg_invite_friends = "images/img_bg_invite_friends.png";
+
 const img_mobile_marketing = "images/img_mobile_marketing.png";
 const img_agenda_1 = "images/img_agenda_1.png";
 const img_agenda_2 = "images/img_agenda_2.png";
@@ -218,8 +222,8 @@ const ic_donasi = "images/bs_icons/syariah/ic_donasi.png";
 const img_logo_light = "images/img_ekomad_light.png";
 const img_logo_dark = "images/img_logo_dark.png";
 const img_logo_ekomad = "images/img_ekomad_logo.png";
-const img_seller_pro = "images/icons/img_seller_pro.png";
-const img_seller_pro_white = "images/icons/img_seller_pro_white.png";
+const img_seller_pro = "images/img_seller_pro.png";
+const img_seller_pro_white = "images/img_seller_pro_white.png";
 
 /* EKOMAD */
 const ic_ekomad_masjid = "images/ic_ekomad_masjid.png";

@@ -24,43 +24,24 @@ import 'rounded_container.dart';
 class DetailScreenList extends StatefulWidget {
   const DetailScreenList({
     Key key,
-    // @required this.product,
-    this.product,
-    this.onVariantSelected,
-    // @required this.recipentMainAddress,
-    this.recipentMainAddress,
   }) : super(key: key);
-
-  final Products product;
-  final Recipent recipentMainAddress;
-  final Function(int id, ProductVariant productVariantSelected)
-      onVariantSelected;
 
   @override
   _DetailScreenListState createState() => _DetailScreenListState();
 }
 
 class _DetailScreenListState extends State<DetailScreenList> {
-  final RecipentRepository recipentRepo = RecipentRepository();
-final ScrollController _scrollController = ScrollController();
-
-  bool isUser;
-  bool isReseller;
+  final ScrollController _scrollController = ScrollController();
+  bool isUser = false;
+  bool isReseller = true;
   int variantSelectedId = 0;
-
-  ProductVariant _productVariant;
 
   // List<ProductVariant> _listProductVariant=[];
 
   @override
   void initState() {
     super.initState();
-    _productVariant = widget.product.productVariant.length > 0
-        ? widget.product.productVariant[0]
-        : null;
-    variantSelectedId = widget.product.productVariant.length > 0
-        ? widget.product.productVariant[0].id
-        : 0;
+
     // initProductVariant();
   }
 
@@ -74,13 +55,6 @@ final ScrollController _scrollController = ScrollController();
   Widget build(BuildContext context) {
     double _screenWidth = MediaQuery.of(context).size.width;
 
-    final userData = BlocProvider.of<UserDataCubit>(context).state.user != null
-        ? BlocProvider.of<UserDataCubit>(context).state.user
-        : null;
-
-    isUser = userData != null;
-    isReseller = isUser ? userData.reseller != null : false;
-
     return Align(
       alignment: Alignment.centerLeft,
       child: Column(
@@ -92,7 +66,6 @@ final ScrollController _scrollController = ScrollController();
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  // "${widget.product.name} ${widget.product.productVariant.length > 0 ? _productVariant.variantName : ""}",
                   "Paket 1 Propolis Pro A Premium (4 Box)",
                   // widget.product.name,
                   style:
@@ -101,14 +74,12 @@ final ScrollController _scrollController = ScrollController();
                 SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Rp 499.000",
-                          // widget.product.productVariant.length > 0
-                          //     ? 'Rp ${AppExt.toRupiah((_productVariant.variantFinalPrice))}'
-                          //     : 'Rp ${AppExt.toRupiah(widget.product.discPrice != 0 ? widget.product.discPrice : widget.product.sellingPrice)}',
+                          'Rp 499.000',
                           style: AppTypo.subtitle1.copyWith(
                             fontWeight: FontWeight.w600,
                             color: Theme.of(context).primaryColor,
@@ -137,7 +108,6 @@ final ScrollController _scrollController = ScrollController();
                             ),
                             Text(
                               "Bojonegoro",
-                              // "${widget.product.supplier.city}",
                               style: AppTypo.caption
                                   .copyWith(color: Color(0xFF00AE8F)),
                             ),
@@ -147,137 +117,87 @@ final ScrollController _scrollController = ScrollController();
                     ),
                   ],
                 ),
-                widget.product.productVariant.length > 0 &&
-                        _productVariant.variantDisc != 0
-                    ? Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 4, vertical: 2),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(2),
-                              color: AppColor.red.withOpacity(0.25),
-                            ),
-                            child: Text(
-                              "30%",
-                              // "${_productVariant.variantDisc ?? 0}%",
-                              style: AppTypo.overline.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                  color: AppColor.red),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 3,
-                          ),
-                          Expanded(
-                            child: Text("Rp 20.000",
-                                // "Rp ${AppExt.toRupiah(_productVariant.variantSellPrice ?? 0)}",
-                                maxLines: kIsWeb ? null : 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: AppTypo.captionAccent.copyWith(
-                                    decoration: TextDecoration.lineThrough)),
-                          ),
-                        ],
-                      )
-                    : widget.product.disc != 0
-                        ? Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 4, vertical: 2),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  color: AppColor.red.withOpacity(0.25),
-                                ),
-                                child: Text(
-                                  "20%",
-                                  // "${widget.product.disc ?? 0}%",
-                                  style: AppTypo.overline.copyWith(
-                                      fontWeight: FontWeight.w700,
-                                      color: AppColor.red),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 3,
-                              ),
-                              Expanded(
-                                child: Text("Rp 20.000",
-                                    // "Rp ${AppExt.toRupiah(widget.product.sellingPrice ?? 0)}",
-                                    maxLines: kIsWeb ? null : 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: AppTypo.captionAccent.copyWith(
-                                        decoration:
-                                            TextDecoration.lineThrough)),
-                              ),
-                            ],
-                          )
-                        : SizedBox(),
-                SizedBox(
-                  height: 8,
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      CupertinoIcons.star_fill,
-                      color: Colors.orangeAccent,
-                      size: 20,
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Text(
-                      "4.9",
-                      style:
-                          AppTypo.caption.copyWith(fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Text(
-                      "(134 ulasan)",
-                      style: AppTypo.caption.copyWith(color: Colors.grey),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   children: [
+                //     Container(
+                //       padding: const EdgeInsets.symmetric(
+                //           horizontal: 4, vertical: 2),
+                //       decoration: BoxDecoration(
+                //         borderRadius: BorderRadius.circular(2),
+                //         color: AppColor.red.withOpacity(0.25),
+                //       ),
+                //       child: Text(
+                //         "10%",
+                //         style: AppTypo.overline.copyWith(
+                //             fontWeight: FontWeight.w700, color: AppColor.red),
+                //       ),
+                //     ),
+                //     SizedBox(
+                //       width: 3,
+                //     ),
+                //     Expanded(
+                //       child: Text("Rp 0",
+                //           maxLines: kIsWeb ? null : 1,
+                //           overflow: TextOverflow.ellipsis,
+                //           style: AppTypo.caption.copyWith(
+                //               decoration: TextDecoration.lineThrough)),
+                //     ),
+                //   ],
+                // ),
+                // SizedBox(
+                //   height: 8,
+                // ),
+                // Row(
+                //   children: [
+                //     Icon(
+                //       CupertinoIcons.star_fill,
+                //       color: Colors.orangeAccent,
+                //       size: 20,
+                //     ),
+                //     SizedBox(
+                //       width: 8,
+                //     ),
+                //     Text(
+                //       "4.9",
+                //       style: AppTypo.caption
+                //           .copyWith(fontWeight: FontWeight.w600),
+                //     ),
+                //     SizedBox(
+                //       width: 8,
+                //     ),
+                //     Text(
+                //       "(134 ulasan)",
+                //       style: AppTypo.caption.copyWith(color: Colors.grey),
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ),
+          // SizedBox(
+          //   height: 10,
+          // ),
+          // SizedBox(),
+          // Padding(
+          //   padding: EdgeInsets.only(top: 10, left: 16, right: 16),
+          //   child: Row(
+          //     children: [
+          //       Text("Komisi"),
+          //       SizedBox(
+          //         width: 10,
+          //       ),
+          //       Text(
+          //         "Rp 0",
+          //         style: AppTypo.overline.copyWith(
+          //             fontWeight: FontWeight.w700,
+          //             color: AppColor.red,
+          //             fontSize: 12),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           SizedBox(
-            height: 10,
-          ),
-          isUser &&
-                  isReseller &&
-                  widget.product.isBeliLangsung != 1 &&
-                  widget.product.isLangganan != 1
-              ? Divider(
-                  thickness: 7,
-                  color: Color(0xFFEBECED),
-                )
-              : SizedBox(),
-          isReseller &&
-                  widget.product.isBeliLangsung == 0 &&
-                  widget.product.isLangganan == 0
-              ? Padding(
-                  padding: EdgeInsets.only(top: 10, left: 16, right: 16),
-                  child: Row(
-                    children: [
-                      Text("Komisi"),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "Rp " + AppExt.toRupiah(widget.product.commissionPrice),
-                        style: AppTypo.overline.copyWith(
-                            fontWeight: FontWeight.w700,
-                            color: AppColor.red,
-                            fontSize: 12),
-                      ),
-                    ],
-                  ),
-                )
-              : SizedBox(),
-          SizedBox(
-            height: 10,
+            height: 24,
           ),
           !isUser
               ? SizedBox()
@@ -299,130 +219,94 @@ final ScrollController _scrollController = ScrollController();
                         "Domisili Anda ",
                         style: AppTypo.caption,
                       ),
-                      widget.recipentMainAddress != null
-                          ? Container(
-                              constraints: const BoxConstraints(maxWidth: 160),
-                              child: Text(
-                                " ${widget.recipentMainAddress.subdistrict}" ??
-                                    " -",
-                                style: AppTypo.caption.copyWith(
-                                    color: Theme.of(context).primaryColor),
-                                maxLines: 1,
-                                overflow: TextOverflow.clip,
-                              ),
-                            )
-                          : Text(
-                              recipentRepo.getSelectedSubdistrictStorage() !=
-                                      null
-                                  ? recipentRepo
-                                          .getSelectedSubdistrictStorage()[
-                                      'subdistrict']
-                                  : ' -',
-                              style: AppTypo.caption.copyWith(
-                                  color: Theme.of(context).primaryColor),
-                              maxLines: 1,
-                              overflow: TextOverflow.clip,
-                            ),
+                      Container(
+                        constraints: const BoxConstraints(maxWidth: 160),
+                        child: Text(
+                          ' -',
+                          style: AppTypo.caption
+                              .copyWith(color: Theme.of(context).primaryColor),
+                          maxLines: 1,
+                          overflow: TextOverflow.clip,
+                        ),
+                      )
                     ],
                   ),
                 ),
-          !isUser ? SizedBox() : SizedBox(height: 10),
-          widget.product.productVariant.length > 0
-              ? Column(
+          SizedBox(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Divider(
+                thickness: 7,
+                color: Color(0xFFEBECED),
+              ),
+              Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Divider(
-                      thickness: 7,
-                      color: Color(0xFFEBECED),
+                    Text(
+                      "Pilih Varian : ",
+                      style: AppTypo.subtitle1
+                          .copyWith(fontWeight: FontWeight.w700),
                     ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      "Pilih varian terlebih dahulu",
+                      style: AppTypo.latoSmall.copyWith(color: AppColor.red),
+                    ),
+                    // List Varian
+                    SizedBox(
+                      height: 50,
+                      child: ListView(
+                        padding: const EdgeInsets.all(6),
+                        physics: ScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
                         children: [
-                          Text(
-                            "Pilih Varian : ",
-                            style: AppTypo.subtitle1
-                                .copyWith(fontWeight: FontWeight.w700),
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            "Pilih varian terlebih dahulu",
-                            style:
-                                AppTypo.latoSmall.copyWith(color: AppColor.red),
-                          ),
-                          // List Varian
-                          SizedBox(
-                            height: 50,
-                            child: ListView(
-                              padding: const EdgeInsets.all(6),
-                              physics: ScrollPhysics(),
-                              scrollDirection: Axis.horizontal,
-                              children: [
-                                for (var i = 0;
-                                    i < 10;
-                                    // widget.product.productVariant.length;
-                                    i++)
-                                  VariantRoundedContainer(
-                                    title:
-                                        "Paket 1 Propolis Pro A Premium (4 Box)",
-                                    isSelected: false,
-                                    onTap: () {},
-                                    // title: widget
-                                    //     .product.productVariant[i].variantName,
-                                    // isSelected: variantSelectedId ==
-                                    //     widget.product.productVariant[i].id,
-                                    // onTap: () {
-                                    //   setState(() {
-                                    //     variantSelectedId =
-                                    //         widget.product.productVariant[i].id;
-                                    //     _productVariant =
-                                    //         widget.product.productVariant[i];
-                                    //   });
-                                    //   widget.onVariantSelected(
-                                    //       widget.product.productVariant[i].id,
-                                    //       _productVariant);
-                                    // },
-                                  ),
-                              ],
+                          for (var i = 0; i < 10; i++)
+                            VariantRoundedContainer(
+                              title: "Paket 1 Propolis Pro A Premium (4 Box)",
+                              isSelected: false,
+                              onTap: () {},
                             ),
-                          ),
-                          // SizedBox(
-                          //   height: 50,
-                          //   child: ListView.builder(
-                          //     padding: EdgeInsets.symmetric(vertical: 7),
-                          //     shrinkWrap: true,
-                          //     scrollDirection: Axis.horizontal,
-                          //     itemCount: widget.product.productVariant.length,
-                          //     itemBuilder: (context, index) {
-                          //       ProductVariant productVariant =
-                          //           widget.product.productVariant[index];
-
-                          //       return VariantRoundedContainer(
-                          //         title: productVariant.variantName,
-                          //         isSelected:
-                          //             variantSelectedId == productVariant.id,
-                          //         onTap: () {
-                          //           setState(() {
-                          //             variantSelectedId = productVariant.id;
-                          //             _productVariant = productVariant;
-                          //           });
-                          //           widget.onVariantSelected(
-                          //               productVariant.id, _productVariant);
-                          //         },
-                          //       );
-                          //     },
-                          //   ),
-                          // ),
                         ],
                       ),
                     ),
+                    // SizedBox(
+                    //   height: 50,
+                    //   child: ListView.builder(
+                    //     padding: EdgeInsets.symmetric(vertical: 7),
+                    //     shrinkWrap: true,
+                    //     scrollDirection: Axis.horizontal,
+                    //     itemCount: widget.product.productVariant.length,
+                    //     itemBuilder: (context, index) {
+                    //       ProductVariant productVariant =
+                    //           widget.product.productVariant[index];
+
+                    //       return VariantRoundedContainer(
+                    //         title: productVariant.variantName,
+                    //         isSelected:
+                    //             variantSelectedId == productVariant.id,
+                    //         onTap: () {
+                    //           setState(() {
+                    //             variantSelectedId = productVariant.id;
+                    //             _productVariant = productVariant;
+                    //           });
+                    //           widget.onVariantSelected(
+                    //               productVariant.id, _productVariant);
+                    //         },
+                    //       );
+                    //     },
+                    //   ),
+                    // ),
                   ],
-                )
-              : SizedBox(),
+                ),
+              ),
+            ],
+          ),
           Divider(
             thickness: 7,
             color: Color(0xFFEBECED),
@@ -438,10 +322,18 @@ final ScrollController _scrollController = ScrollController();
                   flex: 8,
                   child: Row(
                     children: [
-                      SvgPicture.asset(
-                        AppImg.ic_shop_fill,
-                        width: 40,
-                        height: 40,
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              color: AppColor.grey,
+                            ),
+                            borderRadius: BorderRadius.circular(4)),
+                        child: SvgPicture.asset(
+                          AppImg.ic_seller_pro_svg,
+                          width: 24,
+                          height: 24,
+                        ),
                       ),
                       SizedBox(
                         width: 8,
@@ -453,23 +345,6 @@ final ScrollController _scrollController = ScrollController();
                               .copyWith(fontWeight: FontWeight.w600),
                         ),
                       ),
-                      // Expanded(
-                      //   child: Column(
-                      //     crossAxisAlignment: CrossAxisAlignment.start,
-                      //     children: [
-                      //       Text(
-                      //         "${widget.product.supplier.name ?? "-"}",
-                      //         style: AppTypo.caption
-                      //             .copyWith(fontWeight: FontWeight.w600),
-                      //       ),
-                      //       Text(
-                      //         "${widget.product.supplier.city ?? "-"}",
-                      //         style: AppTypo.caption
-                      //             .copyWith(fontWeight: FontWeight.w400),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),
@@ -521,9 +396,6 @@ final ScrollController _scrollController = ScrollController();
                 dataTable.description(
                   "Berat",
                   "250 Gram",
-                  // widget.product.productVariant.length > 0
-                  //     ? "${_productVariant.variantWeight} ${_productVariant.variantUnit}"
-                  //     : "${widget.product.weight} ${widget.product.unit}",
                   AppTypo.caption,
                   null,
                 ),
@@ -533,7 +405,6 @@ final ScrollController _scrollController = ScrollController();
                 dataTable.description(
                   "Kategori",
                   "Kesehatan",
-                  // "${widget.product.categoryName}",
                   AppTypo.caption.copyWith(
                       color: AppColor.primary, fontWeight: FontWeight.w600),
                   () {},
@@ -542,18 +413,16 @@ final ScrollController _scrollController = ScrollController();
                   height: 3,
                 ),
                 ProductDescription(
-                    description:
-                        "Propolis Pro A Premium merupakan produk seri Premium dari Pro A, adalah produk Minuman Kesehatan dengan kekuatan Sinergi 3 Herbal Penyembuh dan Sistem Immune Booster"
-                    // widget.product.productVariant.length > 0
-                    //     ? widget.product.description
-                    //     : widget.product.description ?? '-',
-                    ),
+                  description:
+                      "Propolis Pro A Premium merupakan produk seri Premium dari Pro A, adalah produk Minuman Kesehatan dengan kekuatan Sinergi 3 Herbal Penyembuh dan Sistem Immune Booster",
+                ),
+                SizedBox(
+                  height: 10,
+                ),
               ],
             ),
           ),
-          SizedBox(
-            height: 10,
-          ),
+
           Divider(
             thickness: 7,
             color: Color(0xFFEBECED),
@@ -808,7 +677,7 @@ final ScrollController _scrollController = ScrollController();
                           .copyWith(fontWeight: FontWeight.w600)),
                   TextButton(
                     onPressed: () {
-                      AppExt.pushScreen(context, CommentScreen());
+                      app_ext.pushScreen(context, CommentScreen());
                     },
                     child: Text(
                       "Lihat Semua",

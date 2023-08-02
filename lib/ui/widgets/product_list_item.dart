@@ -24,9 +24,6 @@ import '../../data/blocs/new_cubit/toko_saya/fetch_product_toko_saya/fetch_produ
 
 // ignore: must_be_immutable
 class ProductListItem extends StatelessWidget {
-  final Products product;
-  final FetchProductTokoSayaBloc productShop;
-
   bool isDiscount,
       useLineProgress,
       isShop,
@@ -39,19 +36,15 @@ class ProductListItem extends StatelessWidget {
 
   ProductListItem({
     Key key,
-    // @required this.product,
-    this.product,
-    this.isUpgrader,
+    this.isUpgrader = false,
     this.isDiscount = false,
     this.useLineProgress = false,
     this.isShop = false,
     this.isBumdes = false,
     this.isKomisi = false,
     this.isFlashSale = false,
-    this.isPublicResellerShop,
+    this.isPublicResellerShop = false,
     this.onDelete,
-    //  @required this.productShop,
-    this.productShop,
   }) : super(key: key);
 
   String getProductSlug(String name) {
@@ -63,33 +56,22 @@ class ProductListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final _screenHeight = MediaQuery.of(context).size.height;
 
-    final isUser = BlocProvider.of<UserDataCubit>(context).state.user != null
-        ? BlocProvider.of<UserDataCubit>(context).state.user
-        : null;
-    isUpgrader = isUser != null ? isUser.reseller != null : false;
-
     return kIsWeb
         ? MouseRegion(
             cursor: SystemMouseCursors.click,
             child: GestureDetector(
-              onTap: () {
-                context.beamToNamed('/productdetail/${product.id}');
-              },
-              child: cardProduct(context, isUser, _screenHeight),
+              onTap: () {},
+              child: cardProduct(context, _screenHeight),
             ),
           )
         : InkWell(
             onTap: () {
-              AppExt.pushScreen(
-                  context,
-                  ProductDetailScreen(
-                    productId: product.id,
-                  ));
+              AppExt.pushScreen(context, ProductDetailScreen());
             },
-            child: cardProduct(context, isUser, _screenHeight));
+            child: cardProduct(context, _screenHeight));
   }
 
-  Widget cardProduct(BuildContext context, User userData, double screenHeight) {
+  Widget cardProduct(BuildContext context, double screenHeight) {
     return Container(
       decoration: BoxDecoration(
         color: AppColor.white,
@@ -115,9 +97,7 @@ class ProductListItem extends StatelessWidget {
                       topLeft: Radius.circular(8),
                       topRight: Radius.circular(8)),
                   child: CachedNetworkImage(
-                    imageUrl: product.productAssets.length > 0
-                        ? product.productAssets[0].image
-                        : 'https://venus.bisnisomall.com/images/blank.png',
+                    imageUrl: 'https://venus.bisnisomall.com/images/blank.png',
                     memCacheHeight: Get.height > 350
                         ? (Get.height * 0.25).toInt()
                         : Get.height,
@@ -151,9 +131,7 @@ class ProductListItem extends StatelessWidget {
                         bottom: 7,
                         right: 7,
                         child: GestureDetector(
-                          onTap: () {
-                            onDelete(product.id);
-                          },
+                          onTap: () {},
                           child: Container(
                             padding: EdgeInsets.all(7),
                             decoration: BoxDecoration(
@@ -177,7 +155,7 @@ class ProductListItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                isUpgrader && userData.reseller != null && isKomisi == true
+                isUpgrader
                     ? Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 0, vertical: 2),
@@ -186,7 +164,6 @@ class ProductListItem extends StatelessWidget {
                         ),
                         child: Text(
                           "Komisi Rp 20.000",
-                          // "Komisi Rp ${AppExt.toRupiah(product.commissionPrice) ?? 0}",
                           style: AppTypo.overline.copyWith(
                               fontWeight: FontWeight.w700,
                               color: AppColor.red,
@@ -210,7 +187,6 @@ class ProductListItem extends StatelessWidget {
                 SizedBox(height: 5),
                 Text(
                   "Product Name",
-                  // "${product.name}",
                   maxLines: kIsWeb ? 2 : 2,
                   overflow: TextOverflow.ellipsis,
                   style: AppTypo.caption
@@ -219,7 +195,6 @@ class ProductListItem extends StatelessWidget {
                 SizedBox(height: 5),
                 Text(
                   "Rp 30.000",
-                  // "Rp ${AppExt.toRupiah(isDiscount ? product.discPrice : product.sellingPrice)}",
                   maxLines: kIsWeb ? null : 1,
                   overflow: TextOverflow.ellipsis,
                   style: AppTypo.caption.copyWith(
@@ -237,8 +212,7 @@ class ProductListItem extends StatelessWidget {
                               color: AppColor.red.withOpacity(0.25),
                             ),
                             child: Text(
-                              "20%",
-                              // "${product.disc ?? 0}%",
+                              "10%",
                               style: AppTypo.overline.copyWith(
                                   fontWeight: FontWeight.w700,
                                   color: AppColor.red),
@@ -246,11 +220,10 @@ class ProductListItem extends StatelessWidget {
                           ),
                           SizedBox(width: 3),
                           Expanded(
-                            child: Text("Rp 30.000",
-                                // "Rp ${AppExt.toRupiah(isDiscount ? product.sellingPrice : 0)}",
+                            child: Text("Rp 20.000",
                                 maxLines: kIsWeb ? null : 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: AppTypo.captionAccent.copyWith(
+                                style: AppTypo.caption.copyWith(
                                     decoration: TextDecoration.lineThrough)),
                           ),
                         ],
@@ -269,7 +242,6 @@ class ProductListItem extends StatelessWidget {
                           Expanded(
                             child: Text(
                               "Bogor, Indonesia",
-                              // product.supplier.city,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: AppTypo.caption.copyWith(
@@ -282,7 +254,6 @@ class ProductListItem extends StatelessWidget {
                 SizedBox(height: 5),
                 !useLineProgress
                     ? Text("Terjual 20",
-                        // "Terjual ${AppExt.toRupiah(product.sold)}",
                         style: AppTypo.caption.copyWith(
                             fontSize: 13, color: AppColor.editTextIcon))
                     : Stack(
@@ -290,9 +261,7 @@ class ProductListItem extends StatelessWidget {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(5),
                             child: LinearProgressIndicator(
-                              value: product.stock == 0
-                                  ? 1
-                                  : product.sold / product.stock,
+                              value: 1,
                               backgroundColor: AppColor.silverFlashSale,
                               minHeight: 15,
                               valueColor: AlwaysStoppedAnimation<Color>(
@@ -301,7 +270,6 @@ class ProductListItem extends StatelessWidget {
                           ),
                           Center(
                             child: Text("Terjual 20",
-                                // "Terjual ${AppExt.toRupiah(product.sold)}",
                                 style: AppTypo.body1.copyWith(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 10,
@@ -310,14 +278,14 @@ class ProductListItem extends StatelessWidget {
                         ],
                       ),
                 SizedBox(
-                  height: isUpgrader && userData.reseller != null ? 9 : 0,
+                  height: isUpgrader ? 9 : 0,
                 ),
               ],
             ),
           ),
           Padding(
             padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-            child: isUpgrader && userData.reseller != null
+            child: isUpgrader
                 ? GestureDetector(
                     onTap: () {
                       // if (product.stock != 0) {
@@ -329,14 +297,14 @@ class ProductListItem extends StatelessWidget {
                       //         .showBsReview(context, product, null, isShop);
                       //   }
                       // } else {
-                      //   BSFeedback.outOfStock(
-                      //     context,
-                      //     imgUrl: "images/img_not_found.png",
-                      //     title: "Maaf, stok barang sedang habis",
-                      //     description:
-                      //         " Anda dapat membagikan produk saat stok kembali tersedia",
-                      //   );
-                      // }
+                      BSFeedback.outOfStock(
+                        context,
+                        imgUrl: "images/img_not_found.png",
+                        title: "Maaf, stok barang sedang habis",
+                        description:
+                            " Anda dapat membagikan produk saat stok kembali tersedia",
+                      );
+                      //   }
                     },
                     child: Container(
                       padding:
@@ -360,9 +328,7 @@ class ProductListItem extends StatelessWidget {
                         ],
                       ),
                       decoration: BoxDecoration(
-                          color: product.stock != 0
-                              ? AppColor.primary
-                              : Colors.grey[350],
+                          color: AppColor.primary,
                           borderRadius: BorderRadius.circular(5)),
                     ),
                   )

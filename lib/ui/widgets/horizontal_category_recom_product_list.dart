@@ -122,7 +122,7 @@ class _HorizontalCategoryRecomProductListState
                                       Products _item =
                                           productRecomState.products[index];
                                       return ProductListItem(
-                                        product: _item,
+                                        // product: _item,
                                         isDiscount: _item.disc != 0,
                                         // isFromShop: _item.badge == "Warung" || isFromShop == true,
                                         // isCatering: _item.badge == "Catering",

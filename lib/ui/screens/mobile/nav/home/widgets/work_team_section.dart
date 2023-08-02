@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:marketplace/utils/typography.dart' as app_typo;
-import 'package:marketplace/utils/images.dart' as app_img;
+import 'package:marketplace/utils/typography.dart' as AppTypo;
+import 'package:marketplace/utils/images.dart' as AppImg;
 import 'package:marketplace/utils/colors.dart' as AppColor;
 
 class WorkTeamSection extends StatelessWidget {
@@ -11,32 +11,32 @@ class WorkTeamSection extends StatelessWidget {
 
   final workTeams = [
     const WorkTeam(
-      icon: app_img.ic_tim_kerja,
+      icon: AppImg.ic_timkerja,
       count: 50,
       title: "Total Tim Kerja",
     ),
     const WorkTeam(
-      icon: app_img.ic_dropshipper,
+      icon: AppImg.ic_dropshipper,
       count: 10,
       title: "Dropshipper",
     ),
     const WorkTeam(
-      icon: app_img.ic_reseller,
+      icon: AppImg.ic_reseller_png,
       count: 10,
       title: "Reseller",
     ),
     const WorkTeam(
-      icon: app_img.ic_agen,
+      icon: AppImg.ic_agen,
       count: 10,
       title: "Agent",
     ),
     const WorkTeam(
-      icon: app_img.ic_distributor,
+      icon: AppImg.ic_distributor,
       count: 10,
       title: "Distributor",
     ),
     const WorkTeam(
-      icon: app_img.ic_stokis,
+      icon: AppImg.ic_stokis,
       count: 10,
       title: "Stokis",
     ),
@@ -52,7 +52,7 @@ class WorkTeamSection extends StatelessWidget {
         children: [
           Text(
             "Tim Kerja",
-            style: app_typo.interSmallSemiBold.copyWith(
+            style: AppTypo.interSmallSemiBold.copyWith(
               color: AppColor.black,
             ),
           ),
@@ -124,7 +124,7 @@ class CardWorkTeam extends StatelessWidget {
           ),
           Text(
             "${count}",
-            style: app_typo.interSmallSemiBold.copyWith(
+            style: AppTypo.interSmallSemiBold.copyWith(
               color: AppColor.black,
             ),
           ),
@@ -133,7 +133,7 @@ class CardWorkTeam extends StatelessWidget {
           ),
           Text(
             title,
-            style: app_typo.interVerySmall.copyWith(
+            style: AppTypo.interVerySmall.copyWith(
               color: AppColor.grey,
             ),
           )

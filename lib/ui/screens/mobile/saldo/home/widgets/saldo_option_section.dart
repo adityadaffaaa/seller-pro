@@ -1,6 +1,8 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:marketplace/ui/screens/mobile/saldo/history_saldo/history_saldo_screen.dart';
+import 'package:marketplace/ui/screens/mobile/saldo/tarik_saldo/tarik_saldo_screen.dart';
 import 'package:marketplace/ui/widgets/bs_confirmation.dart';
 import 'package:marketplace/utils/typography.dart' as AppTypo;
 import 'package:marketplace/utils/extensions.dart' as AppExt;
@@ -31,7 +33,7 @@ class SaldoOptionSection extends StatelessWidget {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    // AppExt.pushScreen(context, HistorySaldoScreen());
+                    AppExt.pushScreen(context, HistorySaldoScreen());
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -63,7 +65,7 @@ class SaldoOptionSection extends StatelessWidget {
                     // BsConfirmation().warning(
                     //     context: context,
                     //     title: "Nantikan update terbaru dari kami.");
-                    // AppExt.pushScreen(context, TarikSaldoScreen());
+                    AppExt.pushScreen(context, TarikSaldoScreen());
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

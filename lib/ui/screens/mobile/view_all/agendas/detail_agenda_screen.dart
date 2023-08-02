@@ -4,6 +4,7 @@ import 'package:marketplace/ui/widgets/filled_button.dart';
 import 'package:marketplace/utils/colors.dart' as AppColor;
 import 'package:marketplace/utils/images.dart' as AppImg;
 import 'package:marketplace/utils/typography.dart' as AppTypo;
+import 'package:marketplace/utils/extensions.dart' as AppExt;
 
 class DetailAgendaScreen extends StatelessWidget {
   const DetailAgendaScreen({Key key}) : super(key: key);
@@ -18,7 +19,7 @@ class DetailAgendaScreen extends StatelessWidget {
         centerTitle: false,
         titleSpacing: 10,
         leading: IconButton(
-          onPressed: () => null,
+          onPressed: () => AppExt.popScreen(context),
           icon: const Icon(
             AntDesign.arrowleft,
             color: AppColor.black,
@@ -54,6 +55,7 @@ class DetailAgendaScreen extends StatelessWidget {
                       "UMKM Go Online: Trik Jitu Jualan Laris Manis di Marketplace",
                       style: AppTypo.latoRegularSemiBold.copyWith(
                         color: AppColor.black,
+                        fontSize: 16,
                       ),
                     ),
                     const SizedBox(
@@ -63,6 +65,7 @@ class DetailAgendaScreen extends StatelessWidget {
                       "Online - Gratis",
                       style: AppTypo.latoSmall.copyWith(
                         color: AppColor.gray,
+                        fontSize: 14,
                       ),
                     ),
                     const SizedBox(
@@ -72,6 +75,7 @@ class DetailAgendaScreen extends StatelessWidget {
                       "Selasa, 31 Januari 2023, 16.00 - 17.00 WIB",
                       style: AppTypo.latoSmall.copyWith(
                         color: AppColor.gray,
+                        fontSize: 14,
                       ),
                     ),
                     const SizedBox(
@@ -82,6 +86,7 @@ class DetailAgendaScreen extends StatelessWidget {
                       style: AppTypo.latoSmallSemiBold.copyWith(
                         color: AppColor.textSecondary3,
                         height: 1.8,
+                        fontSize: 14,
                       ),
                     ),
                     const SizedBox(
@@ -91,6 +96,7 @@ class DetailAgendaScreen extends StatelessWidget {
                       "Tagar :",
                       style: AppTypo.latoSmallSemiBold.copyWith(
                         color: AppColor.textSecondary3,
+                        fontSize: 14,
                       ),
                     ),
                     const SizedBox(
@@ -109,8 +115,10 @@ class DetailAgendaScreen extends StatelessWidget {
                           ),
                           child: Text(
                             "webinar",
-                            style: AppTypo.latoSmallSemiBold
-                                .copyWith(color: AppColor.white),
+                            style: AppTypo.latoSmallSemiBold.copyWith(
+                              color: AppColor.white,
+                              fontSize: 14,
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -127,8 +135,10 @@ class DetailAgendaScreen extends StatelessWidget {
                           ),
                           child: Text(
                             "marketplace",
-                            style: AppTypo.latoSmallSemiBold
-                                .copyWith(color: AppColor.white),
+                            style: AppTypo.latoSmallSemiBold.copyWith(
+                              color: AppColor.white,
+                              fontSize: 14,
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -145,8 +155,10 @@ class DetailAgendaScreen extends StatelessWidget {
                           ),
                           child: Text(
                             "marketing ",
-                            style: AppTypo.latoSmallSemiBold
-                                .copyWith(color: AppColor.white),
+                            style: AppTypo.latoSmallSemiBold.copyWith(
+                              color: AppColor.white,
+                              fontSize: 14,
+                            ),
                           ),
                         ),
                       ],
@@ -164,6 +176,7 @@ class DetailAgendaScreen extends StatelessWidget {
                           style: AppTypo.interVerySmall.copyWith(
                             color: AppColor.white,
                             fontWeight: FontWeight.w600,
+                            fontSize: 14,
                           ),
                         ),
                         onPressed: () => null,

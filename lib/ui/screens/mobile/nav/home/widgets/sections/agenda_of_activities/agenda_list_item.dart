@@ -25,12 +25,14 @@ class AgendaListItem extends StatelessWidget {
 
     // TODO: implement build
     return InkWell(
-      onTap: () {
-        // !kIsWeb
-        //     ? app_ext.pushScreen(
-        //         context, ArticleDetailScreen(articleId: ekomadArticle.id))
-        //     : context.beamToNamed('/articledetail/${ekomadArticle.id}');
-      },
+      onTap: onTap,
+      // () {
+
+      //   // !kIsWeb
+      //       ? app_ext.pushScreen(
+      //           context, ArticleDetailScreen(articleId: ekomadArticle.id))
+      //       : context.beamToNamed('/articledetail/${ekomadArticle.id}');
+      // },
       child: cardContent(context, _screenHeight),
     );
   }

@@ -155,65 +155,56 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                   key: _scaffoldKey,
                   backgroundColor: AppColor.textPrimaryInverted,
                   body: SafeArea(
-                    child: BlocBuilder(
-                      bloc: _fetchProductDetailCubit,
-                      builder: (context, state) {
-                        return AppTrans.SharedAxisTransitionSwitcher(
-                          fillColor: Colors.transparent,
-                          transitionType: SharedAxisTransitionType.vertical,
-                          child: state is FetchProductDetailLoading
-                              ? ShimmerProductDetail()
-                              : state is FetchProductDetailFailure
-                                  ? Center(
-                                      child: ErrorFetch(
-                                        message: state.message,
-                                        onButtonPressed: () {
-                                          _fetchProductDetailCubit.load(
-                                              productId: widget.productId);
-                                        },
-                                      ),
-                                    )
-                                  : state is FetchProductDetailSuccess
-                                      ? NotificationListener<
-                                          ScrollNotification>(
-                                          onNotification: _scrollListener,
-                                          child: Stack(
-                                            children: [
-                                              ProductDetailBody(
-                                                // productId: widget.productId,
-                                                // product: state.product,
-                                                // isBayarLangsung:
-                                                //     widget.isBayarLangsung,
-                                                // subcategories:
-                                                //     widget.subcategories ??
-                                                //         null,
-                                              ),
-                                              AnimatedBuilder(
-                                                animation:
-                                                    _colorAnimationController,
-                                                builder: (BuildContext context,
-                                                        Widget child) =>
-                                                    ProductDetailAppbar(
-                                                  product: state.product,
-                                                  backgroundColor:
-                                                      _colorTween.value,
-                                                  iconColor:
-                                                      _iconColorTween.value,
-                                                  iconBackundColor:
-                                                      _iconBackgroundColorTween
-                                                          .value,
-                                                  shadowColor:
-                                                      _shadowColorTween.value,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      : SizedBox(),
-                        );
-                      },
+                      child:
+                          // BlocBuilder(
+                          //   bloc: _fetchProductDetailCubit,
+                          //   builder: (context, state) {
+                          //     return AppTrans.SharedAxisTransitionSwitcher(
+                          //       fillColor: Colors.transparent,
+                          //       transitionType: SharedAxisTransitionType.vertical,
+                          //       child: state is FetchProductDetailLoading
+                          //           ? ShimmerProductDetail()
+                          //           : state is FetchProductDetailFailure
+                          //               ? Center(
+                          //                   child: ErrorFetch(
+                          //                     message: state.message,
+                          //                     onButtonPressed: () {
+                          //                       _fetchProductDetailCubit.load(
+                          //                           productId: widget.productId);
+                          //                     },
+                          //                   ),
+                          //                 )
+                          //               : state is FetchProductDetailSuccess
+                          //                   ?
+                          NotificationListener<ScrollNotification>(
+                    onNotification: _scrollListener,
+                    child: Stack(
+                      children: [
+                        ProductDetailBody(
+                          productId: widget.productId,
+                          // product: state.product,
+                          isBayarLangsung: widget.isBayarLangsung,
+                          subcategories: widget.subcategories ?? null,
+                        ),
+                        AnimatedBuilder(
+                          animation: _colorAnimationController,
+                          builder: (BuildContext context, Widget child) =>
+                              ProductDetailAppbar(
+                            // product: state.product,
+                            backgroundColor: _colorTween.value,
+                            iconColor: _iconColorTween.value,
+                            iconBackundColor: _iconBackgroundColorTween.value,
+                            shadowColor: _shadowColorTween.value,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
+                  )
+                      //                   : SizedBox(),
+                      //     );
+                      //   },
+                      // ),
+                      ),
                 ),
               ),
             ),

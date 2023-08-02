@@ -192,7 +192,7 @@ class HorizontalFlashSale extends StatelessWidget {
                           SizedBox(
                             width: 135,
                             child: ProductListItem(
-                              product: _item,
+                              // product: _item,
                               isDiscount: _item.disc != 0,
                               isKomisi: _item.commission != 0,
                               useLineProgress: true,
@@ -205,7 +205,7 @@ class HorizontalFlashSale extends StatelessWidget {
                     return SizedBox(
                       width: 135,
                       child: ProductListItem(
-                        product: _item,
+                        // product: _item,
                         isKomisi: _item.commission != 0,
                         isDiscount: _item.disc != 0,
                         // isDiscount: true,

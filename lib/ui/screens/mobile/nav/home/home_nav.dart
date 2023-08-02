@@ -27,6 +27,7 @@ import 'package:marketplace/ui/screens/mobile/nav/home/widgets/handling_recipent
 import 'package:marketplace/ui/screens/mobile/nav/home/widgets/hero_section.dart';
 import 'package:marketplace/ui/screens/mobile/nav/home/widgets/invite_friends_section.dart';
 import 'package:marketplace/ui/screens/mobile/nav/home/widgets/product_catalog_section.dart';
+import 'package:marketplace/ui/screens/mobile/nav/home/widgets/sections/banner/push_product_banner.dart';
 import 'package:marketplace/ui/screens/mobile/nav/home/widgets/sections/recipents/selected_recipent.dart';
 import 'package:marketplace/ui/screens/mobile/nav/home/widgets/service_category_menu.dart';
 import 'package:marketplace/ui/screens/mobile/nav/home/widgets/work_team_section.dart';
@@ -414,66 +415,9 @@ class _HomeNavState extends State<HomeNav> with TickerProviderStateMixin {
                                                         user: isUser)
                                                     : HeroSection(
                                                         useIndicator: false),
-                                            /*========== PILIH KECAMATAN ==========*/
-                                            isUser != null
-                                                ? fetchSelectedRecipentState
-                                                        is FetchSelectedRecipentLoading
-                                                    ? ShimmerSelectedRecipent()
-                                                    : fetchSelectedRecipentState
-                                                            is FetchSelectedRecipentFailure
-                                                        ? Center(
-                                                            child: Text(
-                                                                fetchSelectedRecipentState
-                                                                    .message),
-                                                          )
-                                                        : fetchSelectedRecipentState
-                                                                is FetchSelectedRecipentSuccess
-                                                            ? SelectedRecipent(
-                                                                section: fetchSelectedRecipentState
-                                                                            .recipent !=
-                                                                        null
-                                                                    ? fetchSelectedRecipentState.recipent.name ==
-                                                                            null
-                                                                        ? " ${fetchSelectedRecipentState.recipent.subdistrict}"
-                                                                        : " ${fetchSelectedRecipentState.recipent.name}"
-                                                                    : _recipentRepository.getSelectedSubdistrictStorage() !=
-                                                                            null
-                                                                        ? _recipentRepository
-                                                                            .getSelectedSubdistrictStorage()['subdistrict']
-                                                                        : ' -',
-                                                                onPressed: () {
-                                                                  BsDeliveryAddress
-                                                                      .show(
-                                                                    context,
-                                                                    onTap:
-                                                                        () async {
-                                                                      await refreshData(
-                                                                          true);
-                                                                      AppExt.popScreen(
-                                                                          context);
-                                                                    },
-                                                                  );
-                                                                },
-                                                              )
-                                                            : SizedBox.shrink()
-                                                : SelectedRecipent(
-                                                    section: _recipentRepository
-                                                                .getSelectedSubdistrictStorage() !=
-                                                            null
-                                                        ? _recipentRepository
-                                                                .getSelectedSubdistrictStorage()[
-                                                            'subdistrict']
-                                                        : ' -',
-                                                    onPressed: () async {
-                                                      bool isRefresh =
-                                                          await AppExt.pushScreen(
-                                                              context,
-                                                              HandlingRecipentOverlay());
-                                                      if (isRefresh == true) {
-                                                        refreshData(true);
-                                                      }
-                                                    },
-                                                  ),
+                                            const SizedBox(
+                                              height: 18,
+                                            ),
                                             /*========== INVITE FRIENDS ==========*/
                                             fetchCategorysubState
                                                     is FetchCategorysubLoading
@@ -511,6 +455,10 @@ class _HomeNavState extends State<HomeNav> with TickerProviderStateMixin {
                                             SizedBox(height: 24),
                                             /*==========  WORK TEAM  ==========*/
                                             WorkTeamSection(),
+                                            /*========== PUSH PRODUCT BANNER ==========*/
+                                            PushProductBanner(
+                                              onPressed: () {},
+                                            ),
                                             /*========== KATALOG PRODUK ==========*/
                                             SizedBox(height: 24),
                                             Container(
@@ -541,32 +489,32 @@ class _HomeNavState extends State<HomeNav> with TickerProviderStateMixin {
                                                           : SizedBox.shrink(),
                                             ),
                                             SizedBox(height: 8),
+
                                             /*========== AGENDA KEGIATAN ==========*/
-                                            fetchBestSellState
-                                                    is FetchProductsLoading
-                                                ? ShimmerProductList()
-                                                : fetchBestSellState
-                                                        is FetchProductsFailure
-                                                    ? Center(
-                                                        child: Text(
-                                                            fetchBestSellState
-                                                                .message),
-                                                      )
-                                                    : fetchBestSellState
-                                                            is FetchProductsSuccess
-                                                        ? fetchBestSellState
-                                                                    .products
-                                                                    .length >
-                                                                0
-                                                            ? AgendaList(
-                                                                section:
-                                                                    "Agenda Kegiatan",
-                                                                agendas:
-                                                                    agendas,
-                                                                  
-                                                              )
-                                                            : SizedBox.shrink()
-                                                        : SizedBox.shrink(),
+                                            // fetchBestSellState
+                                            //         is FetchProductsLoading
+                                            //     ? ShimmerProductList()
+                                            //     : fetchBestSellState
+                                            //             is FetchProductsFailure
+                                            //         ? Center(
+                                            //             child: Text(
+                                            //                 fetchBestSellState
+                                            //                     .message),
+                                            //           )
+                                            //         : fetchBestSellState
+                                            //                 is FetchProductsSuccess
+                                            //             ? fetchBestSellState
+                                            //                         .products
+                                            //                         .length >
+                                            //                     0
+                                            //                 ?
+                                            AgendaList(
+                                              section: "Agenda Kegiatan",
+                                              agendas: agendas,
+                                            ),
+                                            //                 : SizedBox.shrink()
+                                            //             : SizedBox.shrink(),
+
                                             const SizedBox(height: 8),
                                           ],
                                         ),

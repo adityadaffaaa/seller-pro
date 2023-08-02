@@ -100,124 +100,80 @@ class AmountIndicator extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                if (BlocProvider.of<UserDataCubit>(context).state.user ==
-                    null) {
-                  AppExt.pushScreen(context, SignInScreen());
-                } else {
-                  /*BsConfirmation().warning(
+                /*BsConfirmation().warning(
                     context: context, title: "Nantikan update terbaru dari kami.");*/
-                  AppExt.pushScreen(context, SaldoHomeScreen());
-                }
+                // app_ext.pushScreen(context, SaldoHomeScreen());
               },
               child: Container(
-                child: Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SvgPicture.asset(
-                      AppImg.ic_dompet,
-                      width: 20,
-                      height: 20,
-                    ),
+                    Text("Saldo Dompet",
+                        style: AppTypo.poppinsSubtitle
+                            .copyWith(fontSize: 12, color: AppColor.grey)),
                     SizedBox(
-                      width: 10,
+                      height: 2,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Dompet",
-                            style: AppTypo.body1Lato
-                                .copyWith(fontSize: 12, color: AppColor.grey)),
-                        SizedBox(
-                          height: 2,
-                        ),
-                        user.isNullOrBlank
-                            ? Text("Rp. 0",
-                                style: AppTypo.LatoBold.copyWith(
-                                  fontSize: 13,
-                                ))
-                            : Text("Rp ${user.walletBalance}",
-                                style: AppTypo.LatoBold.copyWith(
-                                  fontSize: 13,
-                                )),
-                      ],
+                    Text(
+                      "Rp 162.000",
+                      style: AppTypo.poppinsSemiBold.copyWith(
+                        color: AppColor.black,
+                      ),
                     )
                   ],
                 ),
               ),
             ),
             GestureDetector(
-              onTap: () => WarningAlertDialog(
-                context,
-                "Coming Soon",
-                "Nantikan update terbaru dari kami.",
-                "Oke",
-                () {
-                  AppExt.popScreen(context);
-                },
-              ),
+              onTap: () => null,
               child: Container(
-                child: Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SvgPicture.asset(
-                      AppImg.ic_coin,
+                      AppImg.ic_riwayat,
                       width: 20,
                       height: 20,
                     ),
                     SizedBox(
-                      width: 10,
+                      height: 2,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Koin",
-                            style: AppTypo.body1Lato
-                                .copyWith(fontSize: 12, color: AppColor.grey)),
-                        SizedBox(
-                          height: 2,
-                        ),
-                        Text("Rp 0",
-                            style: AppTypo.LatoBold.copyWith(
-                              fontSize: 13,
-                            )),
-                      ],
-                    )
+                    Text(
+                      "Riwayat",
+                      style: AppTypo.poppinsSubtitle.copyWith(
+                        fontSize: 12,
+                        color: AppColor.grey,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
             GestureDetector(
-              onTap: () => WarningAlertDialog(
-                context,
-                "Coming Soon",
-                "Nantikan update terbaru dari kami.",
-                "Oke",
-                () {
-                  AppExt.popScreen(context);
-                },
-              ),
+              onTap: () => null,
               child: Container(
                 child: Row(
                   children: [
-                    SvgPicture.asset(
-                      AppImg.ic_voucher,
-                      width: 20,
-                      height: 20,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text("Voucher",
-                            style: AppTypo.body1Lato
-                                .copyWith(fontSize: 12, color: AppColor.grey)),
+                        SvgPicture.asset(
+                          AppImg.ic_transfer,
+                          width: 20,
+                          height: 20,
+                        ),
                         SizedBox(
                           height: 2,
                         ),
-                        Text("0",
-                            style: AppTypo.LatoBold.copyWith(
-                              fontSize: 13,
-                            )),
+                        Text(
+                          "Transfer",
+                          style: AppTypo.poppinsSubtitle.copyWith(
+                            fontSize: 12,
+                            color: AppColor.grey,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
                       ],
                     )
                   ],
